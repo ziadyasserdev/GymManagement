@@ -1,4 +1,6 @@
-﻿using GymManagement.DAL.Repositories.Interfaces;
+﻿using GymManagement.DAL.Data.Contexts;
+using GymManagement.DAL.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +11,51 @@ namespace GymManagement.DAL.Repositories.Implementations
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
+        private readonly GymDbContext dbContext;
+        private readonly DbSet<T> _dbSet;
+        public GenericRepository(GymDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+            _dbSet = dbContext.Set<T>();
+        }
+        public async Task AddAsync(T entity)
+        {
+            await _dbSet.AddAsync(entity);
+        }
+
+        public async Task AddRange(IEnumerable<T> entities)
+        {
+            await _dbSet.AddRangeAsync(entities);
+        }
+
+        public void Delete(T entity)
+        {
+            _dbSet.Remove(entity);
+        }
+
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            return await _dbSet.ToListAsync();
+        }
+
+        public async Task<T> GetByIdAsync(int id)
+        {
+            return await _dbSet.FindAsync(id);
+        }
+
+        public IQueryable<T> Query()
+        {
+            return _dbSet.AsQueryable();
+        }
+
+        public void Update(T entity)
+        {
+            _dbSet.Update(entity);
+        }
+        public void DeleteRange(IEnumerable<T> entities)
+        {
+            _dbSet.RemoveRange(entities);
+        }
+
     }
 }

@@ -1,4 +1,6 @@
 ﻿using GymManagement.DAL.Data.Contexts;
+using GymManagement.DAL.Repositories.Implementations;
+using GymManagement.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +20,7 @@ namespace GymManagement.DAL.DependencyInjection
             {
                 options.UseSqlServer(configuration.GetConnectionString("GymDbConnection"));
             });
+            services.AddScoped<IPlanRepository, PlanRepository>();
             return services;
         }
     }
