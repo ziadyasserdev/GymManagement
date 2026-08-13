@@ -20,7 +20,7 @@ namespace GymManagement.DAL.DependencyInjection
             {
                 options.UseSqlServer(configuration.GetConnectionString("GymDbConnection"));
             });
-            services.AddScoped<IPlanRepository, PlanRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }
