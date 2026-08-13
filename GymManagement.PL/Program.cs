@@ -1,6 +1,6 @@
 
 
-
+using GymManagement.BLL.DependencyInjection;
 using GymManagement.DAL.DependencyInjection;
 namespace GymManagement.PL
 {
@@ -13,6 +13,7 @@ namespace GymManagement.PL
             // Add services to the container.
             builder.Services.AddControllersWithViews();
           builder.Services.AddDAL(builder.Configuration);
+            builder.Services.AddBLL();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -1,5 +1,8 @@
-﻿using MediatR;
+﻿using GymManagement.BLL.Features.Plans.Queries.GetAllPlans;
+using GymManagement.BLL.Features.Plans.Queries.GetPlanById;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace GymManagement.PL.Controllers
 {
@@ -11,9 +14,15 @@ namespace GymManagement.PL.Controllers
         {
             this.mediator = mediator;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var result = await mediator.Send(new GetAllPlansQuery());
+            return View(result.Value);
+        }
+        public async Task<IActionResult> Details([FromRoute] int id)
+        {
+            var result = await mediator.Send(new GetPlanByIdQuery(id));
+            return View(result.Value);
         }
     }
 }
