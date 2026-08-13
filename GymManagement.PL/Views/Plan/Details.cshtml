@@ -1,4 +1,4 @@
-﻿@using GymManagement.BLL.Features.Plans.ViewModels
+﻿@* @using GymManagement.BLL.Features.Plans.ViewModels
 @model PlanViewModel
 
 
@@ -85,4 +85,225 @@
             </div>
         </div>
     </div>
+</div> *@
+
+@using GymManagement.BLL.Features.Plans.ViewModels
+@model PlanViewModel
+
+@{
+    ViewData["Title"] = "Plan Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+
+    <!-- Page Header -->
+    <div class="mb-4">
+        <h1 class="fw-bold mb-2">Plan Details</h1>
+        <p class="text-muted mb-0">
+            View membership plan information
+        </p>
+    </div>
+
+
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-lg-8">
+
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+
+                <!-- Header -->
+                <div class="p-4 @(Model.IsActive ? "bg-primary" : "bg-secondary") text-white">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <span class="badge bg-white text-dark mb-3">
+                                @(Model.IsActive ? "Active Plan" : "Inactive Plan")
+                            </span>
+
+                            <h2 class="fw-bold mb-1">
+                                @Model.Name
+                            </h2>
+
+                            <p class="mb-0 opacity-75">
+                                Gym Membership Plan
+                            </p>
+                        </div>
+
+                        <div>
+                            <i class="bi bi-award fs-1 opacity-75"></i>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Body -->
+                <div class="card-body p-4 p-md-5">
+
+                    <!-- Price -->
+                    <div class="text-center mb-5">
+
+                        <div class="text-muted mb-2">
+                            Membership Price
+                        </div>
+
+                        <div class="display-3 fw-bold text-dark">
+                            @Model.Price.ToString("N0")
+                            <span class="fs-5 text-muted">EGP</span>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Details -->
+                    <div class="row g-4">
+
+                        <!-- Duration -->
+                        <div class="col-md-6">
+
+                            <div class="p-4 bg-light rounded-4 h-100">
+
+                                <div class="d-flex align-items-center">
+
+                                    <div class="me-3">
+                                        <i class="bi bi-calendar-check text-primary fs-3"></i>
+                                    </div>
+
+                                    <div>
+                                        <small class="text-muted">
+                                            Duration
+                                        </small>
+
+                                        <h5 class="fw-bold mb-0">
+                                            @Model.DurationDays Days
+                                        </h5>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Status -->
+                        <div class="col-md-6">
+
+                            <div class="p-4 bg-light rounded-4 h-100">
+
+                                <div class="d-flex align-items-center">
+
+                                    <div class="me-3">
+
+                                        @if (Model.IsActive)
+                                        {
+                                            <i class="bi bi-check-circle-fill text-success fs-3"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-x-circle-fill text-danger fs-3"></i>
+                                        }
+
+                                    </div>
+
+                                    <div>
+
+                                        <small class="text-muted">
+                                            Status
+                                        </small>
+
+                                        <div>
+                                            @if (Model.IsActive)
+                                            {
+                                                <span class="badge bg-success px-3 py-2">
+                                                    Active
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-danger px-3 py-2">
+                                                    Inactive
+                                                </span>
+                                            }
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Description -->
+                        <div class="col-12">
+
+                            <div class="p-4 bg-light rounded-4">
+
+                                <div class="d-flex align-items-start">
+
+                                    <div class="me-3">
+                                        <i class="bi bi-file-text text-primary fs-3"></i>
+                                    </div>
+
+                                    <div class="flex-grow-1">
+
+                                        <small class="text-muted">
+                                            Description
+                                        </small>
+
+                                        <p class="mb-0 mt-2">
+                                            @Model.Description
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Footer -->
+                <div class="card-footer bg-white border-0 p-4">
+
+                    <div class="d-flex justify-content-between gap-2">
+
+                        <a asp-action="Index"
+                           class="btn btn-outline-secondary px-4">
+
+                            <i class="bi bi-arrow-left me-2"></i>
+                            Back to Plans
+
+                        </a>
+
+
+                        <a asp-action="Edit"
+                           asp-route-id="@Model.Id"
+                           class="btn btn-primary px-4">
+
+                            <i class="bi bi-pencil me-2"></i>
+                            Edit Plan
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
