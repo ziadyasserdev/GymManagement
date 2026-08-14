@@ -1,4 +1,6 @@
-﻿using GymManagement.BLL.Features.Plans.Commands.AddPlan;
+﻿using GymManagement.BLL.Features.Plans.Commands.ActivatePlan;
+using GymManagement.BLL.Features.Plans.Commands.AddPlan;
+using GymManagement.BLL.Features.Plans.Commands.DeactivePlan;
 using GymManagement.BLL.Features.Plans.Commands.EditPlan;
 using GymManagement.BLL.Features.Plans.Queries.GetAllPlans;
 using GymManagement.BLL.Features.Plans.Queries.GetPlanById;
@@ -119,6 +121,38 @@ namespace GymManagement.PL.Controllers
 
                 return View(command);
             }
+
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public async Task<IActionResult> Deactivate(int id)
+        {
+            var result = await mediator.Send(
+                new DeactivePlanCommand { Id = id });
+
+            if (!result.IsSuccess)
+            {
+                TempData["ErrorMessage"] = result.Message;
+                return RedirectToAction(nameof(Index));
+            }
+
+            TempData["SuccessMessage"] = result.Message;
+
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public async Task<IActionResult> Activate(int id)
+        {
+            var result = await mediator.Send(
+                new ActivatePlanCommand { Id = id });
+
+            if (!result.IsSuccess)
+            {
+                TempData["ErrorMessage"] = result.Message;
+                return RedirectToAction(nameof(Index));
+            }
+
+            TempData["SuccessMessage"] = result.Message;
 
             return RedirectToAction(nameof(Index));
         }
