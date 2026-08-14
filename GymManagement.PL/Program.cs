@@ -2,6 +2,7 @@
 
 using GymManagement.BLL.DependencyInjection;
 using GymManagement.DAL.DependencyInjection;
+using GymManagement.PL.Middleware;
 namespace GymManagement.PL
 {
     public class Program
@@ -16,7 +17,7 @@ namespace GymManagement.PL
             builder.Services.AddBLL();
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+          
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -28,13 +29,12 @@ namespace GymManagement.PL
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
             app.Run();
         }
     }

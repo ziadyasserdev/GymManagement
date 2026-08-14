@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GymManagement.DAL.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GymManagement.DAL.Repositories.Interfaces
 {
-    internal class ISessionRepository
+    public interface ISessionRepository : IGenericRepository<Session>
     {
     }
 }

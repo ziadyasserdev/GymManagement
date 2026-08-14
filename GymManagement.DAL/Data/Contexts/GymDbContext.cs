@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,13 +12,20 @@ namespace GymManagement.DAL.Data.Contexts
 {
     public class GymDbContext : DbContext
     {
-        public DbSet<Plan> Plans { get; set; }
+       
         public GymDbContext(DbContextOptions<GymDbContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration<Plan>(new PlanConfigurations());     
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
         }
-      
+        public DbSet<Trainer> Trainers { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<HealthRecord> HealthRecords { get; set; }
+        public DbSet<Member> Members { get; set; }
+        public DbSet<Membership> Memberships { get; set; }
+        public DbSet<Plan> Plans { get; set; }
+        public DbSet<Session> Sessions { get; set; }
     }
 }

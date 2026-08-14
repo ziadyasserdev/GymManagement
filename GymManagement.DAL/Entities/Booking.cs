@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace GymManagement.DAL.Entities
 {
-    internal class Booking
+    public class Booking: BaseEntity
     {
+        public bool IsAttended { get; set; } = false;
+        public int MemberId { get; set; }
+        public Member Member { get; set; } = default!;
+        public int SessionId { get; set; }
+        public Session Session { get; set; } = default!;
     }
 }

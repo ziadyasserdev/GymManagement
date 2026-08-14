@@ -10,6 +10,9 @@ namespace GymManagement.DAL.Repositories.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         IPlanRepository Plans { get; }  
+        IBookingRepository Bookings { get; }
+        IMembershipRepository Memberships { get; }
+        ISessionRepository Sessions { get; }    
         Task<IDbContextTransaction> BeginTransactionAsync();
 
         Task<int> SaveAsync();

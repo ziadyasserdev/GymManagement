@@ -17,12 +17,21 @@ namespace GymManagement.DAL.Repositories.Implementations
         {
             this._context = _context;
             Plans = new PlanRepository(_context);
+            Bookings = new BookingRepository(_context);
+            Memberships = new MembershipRepository(_context);
+            Sessions = new SessionRepository(_context);
 
         }
 
         private bool _disposed = false;
 
         public IPlanRepository Plans { get; private set; } = null!;
+
+        public IBookingRepository Bookings { get; private set; } = null!;
+
+        public IMembershipRepository Memberships { get; private set; } = null!;
+
+        public ISessionRepository Sessions { get; private set; } = null!;
 
         protected virtual void Dispose(bool disposing)
         {

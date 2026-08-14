@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace GymManagement.DAL.Enums
 {
-    internal class Specialties
+    public enum Specialties
     {
+        GeneralFitness = 1,
+        Yoga,
+        Boxing,
+        CrossFit
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GymManagement.DAL.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace GymManagement.DAL.Entities
 {
-    internal class Trainer
+    public class Trainer : GymUser
     {
+        public Specialties Specialties { get; set; }
+
+        public ICollection<Session> Sessions { get; set; } = default!;
     }
 }
